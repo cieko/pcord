@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import "@uploadthing/react/styles.css";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
