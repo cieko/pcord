@@ -31,6 +31,7 @@ export const ServerMember = ({
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
   }
 
+  console.log(member)
   return (
     <button
       onClick={onClick}
