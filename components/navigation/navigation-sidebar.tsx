@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 
 import { NavigationAction } from "./navigation-action";
 import { NavigationItem } from "./navigation-item";
+import HomeRedirect from "./home-redirect";
 
 export const NavigationSidebar = async () => {
   const profile = await currentProfile();
@@ -30,6 +31,10 @@ export const NavigationSidebar = async () => {
     <div
       className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-[#291a15] py-3"
     >
+      <HomeRedirect />
+      <Separator
+        className="h-[2px] bg-zinc-600 dark:bg-zinc-700 rounded-md w-10 mx-auto"
+      />
       <NavigationAction />
       <Separator
         className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto"
