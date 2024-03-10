@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useModal } from "@/hooks/use-modal-store";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 interface ServerHeaderProps {
   server: ServerWithMembersWithProfiles;
@@ -29,9 +30,62 @@ interface ServerHeaderProps {
 
 export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
   const { onOpen } = useModal();
+  // const [isDarkBackground, setIsDarkBackground] = useState(false);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // const calculateAverageBrightness = (image: HTMLImageElement) => {
+  //   const canvas = document.createElement("canvas");
+  //   const context = canvas.getContext("2d");
+
+  //   if (!context) {
+  //     console.warn("Canvas context is not supported.");
+  //     return 0;
+  //   }
+
+  //   canvas.width = image.width;
+  //   canvas.height = image.height;
+
+  //   context.drawImage(image, 0, 0, image.width, image.height);
+
+  //   const imageData = context.getImageData(
+  //     0,
+  //     0,
+  //     image.width,
+  //     image.height
+  //   ).data;
+
+  //   let sumBrightness = 0;
+
+  //   for (let i = 0; i < imageData.length; i += 4) {
+  //     const brightness =
+  //       (imageData[i] + imageData[i + 1] + imageData[i + 2]) / 3;
+  //     sumBrightness += brightness;
+  //   }
+
+  //   const averageBrightness = sumBrightness / (imageData.length / 4);
+  //   return averageBrightness;
+  // };
+
+  // useEffect(() => {
+  //   const image = new Image();
+  //   image.src = server?.imageUrl;
+
+  //   image.onload = () => {
+  //     setIsDarkBackground(calculateAverageBrightness(image) < 128);
+  //   };
+  // }, [server]);
 
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <DropdownMenu>
@@ -45,7 +99,12 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             backgroundImage: `url('${server?.imageUrl}')`,
           }}
         >
-          <div className="flex items-center w-full bg-gray-400/50 px-5">
+          <div
+            // className={`flex items-center w-full bg-gray-400/15 px-5 rounded-md
+            // ${ isDarkBackground ? "text-white" : "text-black" }
+            // `}
+            className={`flex items-center w-full bg-gray-400/15 px-5 rounded-md `}
+          >
             {server.name}
             <ChevronDown className="h-5 w-5 ml-auto" />
           </div>
