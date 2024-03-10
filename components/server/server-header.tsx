@@ -103,7 +103,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             // className={`flex items-center w-full bg-gray-400/15 px-5 rounded-md
             // ${ isDarkBackground ? "text-white" : "text-black" }
             // `}
-            className={`flex items-center w-full bg-gray-400/15 px-5 rounded-md `}
+            className={`flex items-center w-full bg-gray-400/15 px-5 rounded-md`}
           >
             {server.name}
             <ChevronDown className="h-5 w-5 ml-auto" />
