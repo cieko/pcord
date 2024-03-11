@@ -116,7 +116,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
           );
         }}
         onUploadBegin={(name) => {
-          console.log("Uploading: ", name);
+          // console.log("Uploading: ", name);
         }}
       />
       </div>
