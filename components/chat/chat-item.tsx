@@ -176,7 +176,7 @@ export const ChatItem = ({
               className={cn(
                 "text-xl text-[#ffbd80]",
                 deleted &&
-                  "italic text-amber-400 text-md mt-1"
+                  "italic text-amber-400/65 text-md mt-1"
               )}
             >
               {content}
