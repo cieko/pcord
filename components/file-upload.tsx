@@ -9,6 +9,7 @@ import "@uploadthing/react/styles.css";
 import "@uploadthing/react/styles.css";
 import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
+import { useParams } from "next/navigation";
 
 interface FileUploadProps {
   onChange: (url?: string) => void;
@@ -18,6 +19,7 @@ interface FileUploadProps {
 
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
   const fileType = value?.split(".").pop();
+  const params = useParams();
 
   if (value && fileType !== "pdf") {
     return (
@@ -34,28 +36,28 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
     );
   }
 
-  // if (value && fileType === "pdf") {
-  //   return (
-  //     <div className="relative flex items-center p-2 mt-2 rounded-md bg-background/10">
-  //       <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
-  //       <a
-  //         href={value}
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //         className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
-  //       >
-  //         {value}
-  //       </a>
-  //       <button
-  //         onClick={() => onChange("")}
-  //         className="bg-rose-500 text-white p-1 rounded-full absolute -top-2 -right-2 shadow-sm"
-  //         type="button"
-  //       >
-  //         <X className="h-4 w-4" />
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  if (value && fileType === "pdf") {
+    return (
+      <div className="relative flex items-center p-2 mt-2 rounded-md bg-background/10">
+        <FileIcon className="h-10 w-10 fill-amber-200 stroke-amber-400" />
+        <a
+          href={value}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-2 text-sm text-amber-400 hover:underline"
+        >
+          {value}
+        </a>
+        <button
+          onClick={() => onChange("")}
+          className="bg-rose-500 text-white p-1 rounded-full absolute -top-2 -right-2 shadow-sm"
+          type="button"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-start justify-center w-[28.5rem]">
@@ -86,7 +88,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
       {/* SERVER IMAGE UPLOADER 👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇 */}
       <div className="flex items-center justify-start gap-16">
       <div className="text-xs whitespace-nowrap font-bold text-gray-500 tracking-normal uppercase">
-        Server Image :
+        {params?.serverId ? 'File to send :' : 'Server Image :'}
       </div>
       {/* <UploadDropzone
         endpoint={endpoint}
@@ -98,6 +100,7 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
         }}
         className="w-full"
       /> */}
+      {/* @ts-ignore */}
       <UploadButton<OurFileRouter>
         className="mt-4 w-full ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50"
         endpoint={endpoint}
